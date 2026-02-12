@@ -19,8 +19,8 @@ interface LoginRequest extends RegisterRequest {
   deviceId: string
 }
 
-const isProd = process.env.ENVIROMENT === 'prod'
-const site = isProd ? 'none' : 'Lax'
+const isProd = process.env.NODE_ENV === 'production'
+const site = isProd ? 'None' : 'Lax'
 const cookieSecret = process.env.COOKIE_SECRET ?? 'cookie-secret'
 const maxAgeInSeconds = 7 * 24 * 60 * 60
 
