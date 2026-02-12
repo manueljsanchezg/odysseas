@@ -8,6 +8,14 @@ import { citiesRoutes } from './cities/cities.routes'
 
 const app = new Hono()
 
+app.use(
+  '*',
+  cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    credentials: true,
+  })
+)
+
 const limiter = rateLimiter({
   windowMs: 5 * 60 * 1000,
   limit: 100,
@@ -16,14 +24,6 @@ const limiter = rateLimiter({
 })
 
 app.use(limiter)
-
-app.use(
-  '*',
-  cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-    credentials: true,
-  })
-)
 
 app.get('/health', async (c) => {
   return c.text('Hello world!')
