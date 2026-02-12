@@ -1,0 +1,22 @@
+# --- General ---
+node_modules/
+
+# --- Enviroment variables ---
+.env
+.env.*
+!.env.example
+
+# --- Builds y Dist ---
+dist/
+build/
+out/
+
+# --- Logs ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Frontend (npm/Vite) ---
+
+# --- Backend (Bun) ---

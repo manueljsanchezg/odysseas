@@ -1,0 +1,37 @@
+services:
+  pg_db:
+    image: postgres:18-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=user
+      - POSTGRES_DB=test
+    volumes:
+      - pg_data:/var/lib/postgresql
+
+  backend:
+    depends_on:
+      - pg_db
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URL=postgresql://user:user@pg_db/test
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 5173:5173
+
+volumes:
+  pg_data:

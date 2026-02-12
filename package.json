@@ -1,0 +1,19 @@
+{
+  "name": "odysseas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:lint": "cd frontend && npm run lint:fix",
+    "frontend:format": "cd frontend && npm run format:fix",
+    "backend:dev": "cd backend && bun dev",
+    "backend:lint": "cd backend && npm run lint:fix",
+    "backend:format": "cd backend && npm run format:fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

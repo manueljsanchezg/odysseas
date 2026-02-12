@@ -1,0 +1,31 @@
+# Dependencies and system
+node_modules
+.bun
+.gitignore
+
+# Builds and outputs
+dist
+build
+out
+.output
+coverage
+
+# Bun files
+bun.lock
+
+# ENV
+.env
+.env.*
+
+# Drizzle ORM
+drizzle
+migrations
+*.sqlite
+*.db
+
+# IDE Config
+.vscode
+.idea
+
+public
+assets
