@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, For, Show } from "solid-js"
+import { Component, createEffect, createSignal, For, onCleanup, Show } from "solid-js"
 import { findCitiesByName } from "../api/cities.service"
 import { useNavigate } from "@solidjs/router"
 import { createTripCities } from "../api/trip.service"
@@ -25,24 +25,28 @@ const AddCitiesModal: Component<ModalProps> = (props) => {
     const [isLoading, setIsLoading] = createSignal(false)
     const [error, setError] = createSignal<string | null>(null)
 
-    createEffect(async () => {
+    createEffect(() => {
         const query = cityName()
         if (query.length === 0) {
             setCities(null)
             return
         }
-        try {
-            const result = await findCitiesByName(query)
-            setCities(result.data)
-        } catch (error) {
-            console.error(error)
-            setCities([])
-        }
+        const handler = setTimeout(async () => {
+            try {
+                const result = await findCitiesByName(query)
+                console.log(result)
+                setCities(result.data)
+            } catch (error) {
+                console.error(error)
+                setCities([])
+            }
+        }, 800)
+
+        onCleanup(() => clearTimeout(handler))
     })
 
     const handleSelectCity = (city: City) => {
         if (selectedCities().some(selected => selected.id === city.id)) return
-
         setSelectedCities((prev) => [...prev, city])
         setCityName("")
         setCities(null)
