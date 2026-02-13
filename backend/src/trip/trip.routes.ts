@@ -97,7 +97,6 @@ tripRoutes.post(
   async (c) => {
     try {
       const tripId = Number(c.req.param('id'))
-      console.log("Hola")
       const { citiesId } = await c.req.json() as { citiesId: number[] }
 
       const validCities = await citiesService.findCitiesByCitiesId(citiesId)

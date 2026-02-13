@@ -37,9 +37,7 @@ export const findTripByIdAndUserId = async (tripId: number) => {
 
 export const createTripCities = async (tripId: number, citiesId: number[]) => {
   try {
-    console.log(citiesId)
     const response = await api.post(`/trips/${tripId}/cities`, {citiesId})
-    console.log(response)
     return { success: true, data: response.data }
   } catch {
     return { success: false, errorType: 'SERVER' }

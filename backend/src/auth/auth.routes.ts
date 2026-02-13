@@ -48,24 +48,15 @@ authRoutes.post('/login', sValidator('json', authSchema.loginUserSchema), async 
   try {
     const { username, password, deviceId } = (await c.req.json()) as LoginRequest
 
-    console.log(`[DEBUG] Login intento -> User: "${username}", Pass recibido: "${password}"`);
-
     const user = await userService.findUserByUsername(username)
-    
 
     if (!user) {
-      console.log(`[DEBUG] Usuario no encontrado: "${username}"`);
       return c.json({ message: 'Invalid credentials' }, 400)
     }
 
-    console.log(`[DEBUG] Usuario encontrado ID: ${user.id}`);
-    console.log(`[DEBUG] Hash en DB: "${user.password}"`);
-
     const match = await Bun.password.verify(password, user.password)
-    console.log(`[DEBUG] Resultado de Bun.password.verify: ${match}`);
 
-    if (!match) { 
-      console.log(`[DEBUG] Contraseña incorrecta para usuario: "${username}"`);
+    if (!match) {
       return c.json({ message: 'Invalid credentials' }, 400)
     }
 

@@ -34,7 +34,6 @@ const AddCitiesModal: Component<ModalProps> = (props) => {
         const handler = setTimeout(async () => {
             try {
                 const result = await findCitiesByName(query)
-                console.log(result)
                 setCities(result.data)
             } catch (error) {
                 console.error(error)
