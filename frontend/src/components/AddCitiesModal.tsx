@@ -39,7 +39,7 @@ const AddCitiesModal: Component<ModalProps> = (props) => {
                 console.error(error)
                 setCities([])
             }
-        }, 800)
+        }, 600)
 
         onCleanup(() => clearTimeout(handler))
     })
